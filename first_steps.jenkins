@@ -1,5 +1,6 @@
 #!groovy
 // Check ub1 properties
+// Запрет одновременного выполнения нескольких версий
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -7,7 +8,9 @@ pipeline {
         label 'master'
         }
     options {
+        // Хранение логов и артефактов полседних 10ти сборок
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        // В выводе хотим видеть временные отметки
         timestamps()
     }
     stages {
